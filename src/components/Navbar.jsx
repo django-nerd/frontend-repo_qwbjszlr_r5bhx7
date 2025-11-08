@@ -1,57 +1,52 @@
-import { useState } from 'react';
-import { ShoppingCart, Menu, X, Search } from 'lucide-react';
+import React, { useState } from 'react';
+import { Menu, X, QrCode, Search, ShoppingBag } from 'lucide-react';
 
-export default function Navbar() {
+const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-black/5 bg-white/80 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-black text-white">
-            <ShoppingCart size={20} />
+    <header className="sticky top-0 z-50 bg-white/70 backdrop-blur border-b border-gray-200">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-rose-500 to-amber-500 grid place-items-center text-white font-bold">M</div>
+            <span className="font-semibold tracking-tight text-lg">MenuXR</span>
           </div>
-          <span className="text-xl font-semibold tracking-tight">TopEnd</span>
-        </div>
 
-        <nav className="hidden items-center gap-8 md:flex">
-          <a href="#new" className="text-sm text-gray-700 hover:text-black">New</a>
-          <a href="#bestsellers" className="text-sm text-gray-700 hover:text-black">Bestsellers</a>
-          <a href="#collections" className="text-sm text-gray-700 hover:text-black">Collections</a>
-          <a href="#sale" className="text-sm text-gray-700 hover:text-black">Sale</a>
-        </nav>
+          <nav className="hidden md:flex items-center gap-8 text-sm">
+            <a href="#menu" className="hover:text-rose-600 transition-colors">Menu</a>
+            <a href="#specials" className="hover:text-rose-600 transition-colors">Specials</a>
+            <a href="#qr" className="hover:text-rose-600 transition-colors flex items-center gap-2"><QrCode size={16}/> QR</a>
+          </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
-          <div className="relative">
-            <Search className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-            <input
-              className="w-56 rounded-full border border-gray-200 bg-white px-9 py-2 text-sm outline-none ring-0 placeholder:text-gray-400 focus:border-gray-300"
-              placeholder="Search products"
-              aria-label="Search products"
-            />
+          <div className="hidden md:flex items-center gap-3">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+              <input
+                className="w-56 rounded-full border border-gray-200 pl-9 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
+                placeholder="Search dishes..."
+              />
+            </div>
+            <button className="inline-flex items-center gap-2 rounded-full bg-gray-900 text-white px-4 py-2 text-sm hover:bg-gray-800">
+              <ShoppingBag size={16}/> Order
+            </button>
           </div>
-          <button className="rounded-full border border-gray-200 px-4 py-2 text-sm font-medium hover:bg-gray-50">Sign in</button>
-          <button className="relative rounded-full bg-black px-4 py-2 text-sm font-medium text-white hover:bg-black/90">
-            Cart
-            <span className="absolute -right-2 -top-2 inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-rose-500 px-1 text-xs text-white">2</span>
+
+          <button className="md:hidden p-2" aria-label="Toggle menu" onClick={() => setOpen(v => !v)}>
+            {open ? <X/> : <Menu/>}
           </button>
         </div>
 
-        <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Toggle menu">
-          {open ? <X /> : <Menu />}
-        </button>
-      </div>
-
-      {open && (
-        <div className="border-t border-black/5 bg-white md:hidden">
-          <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-4">
-            <a href="#new" className="py-2 text-sm">New</a>
-            <a href="#bestsellers" className="py-2 text-sm">Bestsellers</a>
-            <a href="#collections" className="py-2 text-sm">Collections</a>
-            <a href="#sale" className="py-2 text-sm">Sale</a>
+        {open && (
+          <div className="md:hidden pb-4 space-y-2">
+            <a href="#menu" className="block px-2 py-2 rounded hover:bg-gray-50">Menu</a>
+            <a href="#specials" className="block px-2 py-2 rounded hover:bg-gray-50">Specials</a>
+            <a href="#qr" className="block px-2 py-2 rounded hover:bg-gray-50">QR</a>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </header>
   );
-}
+};
+
+export default Navbar;

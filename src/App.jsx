@@ -1,17 +1,18 @@
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import ProductGrid from './components/ProductGrid';
-import Collections from './components/Collections';
-import Footer from './components/Footer';
+import React from 'react';
+import Navbar from './components/Navbar.jsx';
+import Hero from './components/Hero.jsx';
+import MenuShowcase from './components/MenuShowcase.jsx';
+import QRSection from './components/QRSection.jsx';
+import Footer from './components/Footer.jsx';
 
 function App() {
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <div className="min-h-screen bg-white text-gray-900 flex flex-col">
       <Navbar />
-      <main>
+      <main className="flex-1">
         <Hero />
-        <ProductGrid />
-        <Collections />
+        <MenuShowcase />
+        <QRSection />
       </main>
       <Footer />
     </div>
